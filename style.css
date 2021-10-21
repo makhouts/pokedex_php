@@ -1,0 +1,114 @@
+@font-face {
+    font-family: pokemonFont;
+    src:url("pokemon_classic.ttf");
+}
+
+html {
+    background: url(./assets/bg.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(241, 241, 241);
+    height: 100%;
+    font-family: 'pokemonFont';
+}
+
+.pokedex {
+    position: absolute;
+    left: 680px;
+    top: 200px;
+    transform: scale(1.5);
+}
+
+.pokemon-information img {
+    width: 300px;
+}
+
+#image {
+    position: absolute;
+    left: 645px;
+    top: 240px;
+}
+
+#pokemon-name {
+    position: absolute;
+    top: 280px;
+    left: 1040px;
+    color: darkgreen;
+    font-size: 23px;
+}
+
+#pokemonId {
+    position: absolute;
+    left: 645px;
+    top: 530px;
+}
+
+.moves {
+    position: absolute;
+    left: 1020px;
+    top: 320px;
+    color: darkgreen;
+    padding: 20px;
+}
+
+#previous {
+    position: absolute;
+    left: 1075px;
+    top: 572px;
+    width: 33px;
+    height: 27px;
+    opacity: 0;
+}
+
+#next {
+    position: absolute;
+    left: 1110px;
+    top: 570px;
+    width: 33px;
+    height: 27px;
+    opacity: 0;
+}
+
+#searchValue{
+    position: absolute;
+    left: 660px;
+    top: 590px;
+    width: 150px;
+    height: 60px;
+    background-color: red;
+    text-align: center;
+    font-size: 10px;
+    font-family: pokemonFont;
+}
+#searchBtn{
+    position: absolute;
+    left: 820px;
+    top: 635px;
+    background-color: red;
+    text-align: center;
+}
+
+#evolutionImg {
+    position: absolute;
+    top: 680px;
+    left: 1030px;
+}
+
+#evolutionImg img {
+    width: 200px;
+    cursor: pointer;
+}
+
+.evo1 {
+    order: 1;
+}
+.evo2 {
+    order: 2;
+}
+.evo3 {
+    order: 3;
+}
+
+.button {
+    cursor: pointer;
+}
