@@ -10,6 +10,9 @@
 <body>
     <?php
         $pokemonId = $_GET['searchValue'];
+        if ($_GET['searchValue'] == '') {
+            $pokemonId = 1;
+        }
         if (isset($pokemonId)) {
             $api_url = "https://pokeapi.co/api/v2/pokemon/$pokemonId";
         } else {
@@ -56,7 +59,11 @@
         <div>
         <div class="border-shadow1"></div>
         <div class="border-shadow2"></div>
-            <a href="?searchValue=<?php echo $id -1 ?>"><button class='button' type='submit' name='prevBtn' id="previous"></button></a>
+            <a href="?searchValue=<?php if ($id == 1) {
+                echo '1';
+            } else {
+                echo $id -1;
+            }; ?>"><button class='button' type='submit' name='prevBtn' id="previous"></button></a>
             <a href="?searchValue=<?php echo $id +1 ?>"><button class='button' type='submit' name='nextBtn' id="next"></button></a>
         </div>
         <div>
@@ -71,15 +78,32 @@
         <?php
             $fetchEvolutions = file_get_contents($evolution_url);
             $evolutionData = json_decode($fetchEvolutions);
-            $x = $evolutionData->chain->species->name;
             
-            $getEvolutionImg = file_get_contents("https://pokeapi.co/api/v2/pokemon/$x");
-            $imageData = json_decode($getEvolutionImg);
+            if(isset($evolutionData->chain->species->name)){
+                $x = $evolutionData->chain->species->name;
+                $getEvolutionImg = file_get_contents("https://pokeapi.co/api/v2/pokemon/$x");
+                $imageData = json_decode($getEvolutionImg);
+                $imgLink = $imageData->sprites->front_default;
+            };
 
-            $imgLink = $imageData->sprites->front_default
+            if(isset($evolutionData->chain->evolves_to[0]->species->name)) {
+                $z = $evolutionData->chain->evolves_to[0]->species->name;
+                $getEvolutionImg3 = file_get_contents("https://pokeapi.co/api/v2/pokemon/$z");
+                $imageData3 = json_decode($getEvolutionImg3);
+                $imgLink3 = $imageData3->sprites->front_default;
+            };
+
+            if (isset($evolutionData->chain->evolves_to[0]->evolves_to[0]->species->name)) {
+                $y = $evolutionData->chain->evolves_to[0]->evolves_to[0]->species->name;
+                $getEvolutionImg2 = file_get_contents("https://pokeapi.co/api/v2/pokemon/$y");
+                $imageData2 = json_decode($getEvolutionImg2);
+                $imgLink2 = $imageData2->sprites->front_default;
+            };
         ?>
 
         <a href="?searchValue=<?php echo $x ?>"><img class='evo1' src="<?php echo $imgLink ?>" alt=""></a>
+        <a href="?searchValue=<?php echo $z ?>"><img class='evo3' src="<?php echo $imgLink3 ?>" alt=""></a>
+        <a href="?searchValue=<?php echo $y ?>"><img class='evo2' src="<?php echo $imgLink2 ?>" alt=""></a>
     </div>
 </body>
 </html>
